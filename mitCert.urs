@@ -22,6 +22,12 @@ functor Make(M : sig
                  (* If provided, automatically creates accounts for unknown usernames.
                   * Fields are initialized from these defaults. *)
 
+                 val allowMasquerade : option (variant (mapU unit groups))
+                 (* If present, members of this group can pretend to be anyone else.
+                  * We assume that this is an uber-group that will always pass access-control checks! *)
+
+                 val requireSsl : bool
+
                  val flg : folder groups
                  val flo : folder others
 

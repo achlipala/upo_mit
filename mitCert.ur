@@ -15,6 +15,8 @@ functor Make(M : sig
                  table users : ([kerberos = string, commonName = string] ++ mapU bool groups ++ others)
 
                  val defaults : option $(mapU bool groups ++ others)
+                 val allowMasquerade : option (variant (mapU unit groups))
+                 val requireSsl : bool
 
                  val flg : folder groups
                  val flo : folder others
@@ -24,8 +26,8 @@ functor Make(M : sig
 Auth.Make(struct
               open M
 
-              con name = kerberos
-              con setThese = [commonName = string]
+              con name = commonName
+              con setThese = [kerberos = string]
 
               val underlying =
                   user <- ClientCert.user;
@@ -37,6 +39,8 @@ Auth.Make(struct
                       else
                           return (Some {kerberos = uname, commonName = user.CommonName})
 
+              constraint [name] ~ setThese
+              constraint ([name] ++ map (fn _ => ()) setThese) ~ groups
               constraint ([name] ++ map (fn _ => ()) setThese ++ groups) ~ others
               val fls = _
               val injs = _
