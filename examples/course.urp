@@ -1,0 +1,9 @@
+library ../spring2016
+library $/upo/default
+rewrite all Course/*
+timeFormat %m/%d/%Y %I:%M %p
+database dbname=course
+sql course.sql
+safeGet main
+
+course
