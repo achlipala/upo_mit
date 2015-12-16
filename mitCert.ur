@@ -27,7 +27,7 @@ Auth.Make(struct
               open M
 
               con name = commonName
-              con setThese = [kerberos = string]
+              con key = [kerberos = string]
 
               val underlying =
                   user <- ClientCert.user;
@@ -39,9 +39,9 @@ Auth.Make(struct
                       else
                           return (Some {kerberos = uname, commonName = user.CommonName})
 
-              constraint [name] ~ setThese
-              constraint ([name] ++ map (fn _ => ()) setThese) ~ groups
-              constraint ([name] ++ map (fn _ => ()) setThese ++ groups) ~ others
+              constraint [name] ~ key
+              constraint ([name] ++ map (fn _ => ()) key) ~ groups
+              constraint ([name] ++ map (fn _ => ()) key ++ groups) ~ others
               val fls = _
               val injs = _
               val eqs = _
