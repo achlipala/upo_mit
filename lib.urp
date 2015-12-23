@@ -1,4 +1,6 @@
 library $/upo
+allow url http://websis.mit.edu/
 
 mitCert
+webSIS
 semester
