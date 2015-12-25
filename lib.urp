@@ -1,6 +1,8 @@
 library $/upo
 allow url http://websis.mit.edu/
+allow mime text/csv
 
 mitCert
 webSIS
+mitGrades
 semester
