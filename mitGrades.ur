@@ -78,6 +78,7 @@ functor Make(M : sig
             sheet <- query (SELECT users.MitId, users.UserName, users.Units, users.SubjectNum, users.SectionNum, users.LastName, users.FirstName, users.MiddleInitial
                             FROM users
                             WHERE users.IsStudent
+                              AND users.MitId <> ''
                             ORDER BY users.LastName, users.FirstName, users.MiddleInitial)
                      (fn {Users = r} sheet =>
                          let
