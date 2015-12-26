@@ -13,10 +13,11 @@ functor Make(M : sig
                  (* Miscellaneous remaining fields of the users table *)
 
                  constraint [kerberos] ~ [commonName]
-                 constraint [kerberos, commonName] ~ groups
-                 constraint ([kerberos, commonName] ++ groups) ~ others
+                 constraint [Password] ~ [kerberos, commonName]
+                 constraint [kerberos, commonName, Password] ~ groups
+                 constraint ([kerberos, commonName, Password] ++ groups) ~ others
 
-                 table users : ([kerberos = string, commonName = string] ++ mapU bool groups ++ others)
+                 table users : ([kerberos = string, commonName = string, Password = option string] ++ mapU bool groups ++ others)
 
                  val defaults : option $(mapU bool groups ++ others)
                  (* If provided, automatically creates accounts for unknown usernames.
@@ -32,4 +33,8 @@ functor Make(M : sig
                  val flo : folder others
 
                  val injo : $(map sql_injectable others)
-             end) : Auth.S where con groups = M.groups
+             end) : sig
+    include Auth.S where con groups = M.groups
+
+    structure Login : Ui.S0
+end
