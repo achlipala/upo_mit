@@ -130,13 +130,16 @@ functor Make(M : sig
                            case byP of
                                None =>
                                user <- ClientCert.user;
-                               (case String.split user.Email #"@" of
-                                    None => error <xml>Invalid e-mail address in certificate</xml>
-                                  | Some (uname, dom) =>
-                                    if dom <> "MIT.EDU" then
-                                        error <xml>Certificate is not for an MIT e-mail address.</xml>
-                                    else
-                                        return (Some {kerberos = uname, commonName = user.CommonName}))
+                               (case user of
+                                    None => return None
+                                  | Some user =>
+                                    case String.split user.Email #"@" of
+                                        None => error <xml>Invalid e-mail address in certificate</xml>
+                                      | Some (uname, dom) =>
+                                        if dom <> "MIT.EDU" then
+                                            error <xml>Certificate is not for an MIT e-mail address.</xml>
+                                        else
+                                            return (Some {kerberos = uname, commonName = user.CommonName}))
                              | Some r =>
                                name <- oneOrNoRowsE1 (SELECT (users.{commonName})
                                                       FROM users
