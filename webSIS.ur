@@ -2,12 +2,13 @@ open Bootstrap3
 
 functor Make(M: sig
                  con others :: {Type}
-                 constraint [Kerberos, MitId, UserName, IsStudent, HasDropped, Units, SubjectNum, SectionNum, LastName, FirstName, MiddleInitial] ~ others
+                 constraint [Kerberos, MitId, UserName, IsStudent, IsListener, HasDropped, Units, SubjectNum, SectionNum, LastName, FirstName, MiddleInitial] ~ others
 
                  table user : ([Kerberos = string,
                                 MitId = string,
                                 UserName = string,
                                 IsStudent = bool,
+                                IsListener = bool,
                                 HasDropped = bool,
                                 Units = string,
                                 SubjectNum = string,
@@ -163,6 +164,7 @@ functor Make(M: sig
                              val data = {MitId = field "MIT ID",
                                          UserName = cat (field "Student First") (cat (eatPeriod (field "Student MI")) (field "Student Last")),
                                          IsStudent = status = "Reg",
+                                         IsListener = status = "Lis",
                                          HasDropped = status = "Can",
                                          Units = fieldOpt "Units",
                                          SubjectNum = fieldOpt "Enrolled",
@@ -181,6 +183,7 @@ functor Make(M: sig
                                                      MitId = string,
                                                      UserName = string,
                                                      IsStudent = bool,
+                                                     IsListener = bool,
                                                      HasDropped = bool,
                                                      Units = string,
                                                      SubjectNum = string,
