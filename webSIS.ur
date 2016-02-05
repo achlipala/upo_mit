@@ -108,7 +108,11 @@ functor Make(M: sig
 
                                 fun parseLines data acc =
                                     case String.split data #"\n" of
-                                        None => acc
+                                        None =>
+                                        if String.all Char.isSpace data then
+                                            acc
+                                        else
+                                            parseLine headings data [] :: acc
                                       | Some (line, data) =>
                                         if String.all Char.isSpace line then
                                             parseLines data acc
