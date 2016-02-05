@@ -138,9 +138,10 @@ functor Make(M: sig
 
                              fun fieldOpt name = Option.get "" (List.assoc name alist)
 
-                             val kerb = case String.split (field "Student Email") #"@" of
+                             val email = field "Student Email"
+                             val kerb = case String.split email #"@" of
                                                 Some (kerb, "MIT.EDU") => kerb
-                                              | _ => error <xml>"Student Email" field of WebSIS data isn't "@MIT.EDU"</xml>
+                                              | _ => email
 
                              (* Smart name concatenation, skipping blank parts *)
                              fun cat s1 s2 =
