@@ -7,7 +7,7 @@ open Semester.Make(struct
                        val notable = (r "02-06", "Registration Day")
                                          :: (r "02-07", "First Day of Classes")
                                          :: (r "02-05", "Registration Deadline")
-                                         :: (r "02-10", "Presidents Day - Holiday")
+                                         :: (r "02-20", "Presidents Day - Holiday")
                                          :: (r "02-21", "Monday Schedule of Classes")
                                          :: (r "03-10", "Add Date")
                                          :: (r "03-27", "Spring Vacation")
