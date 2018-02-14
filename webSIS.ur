@@ -145,6 +145,7 @@ functor Make(M: sig
                              val email = field "Student Email"
                              val kerb = case String.split email #"@" of
                                                 Some (kerb, "MIT.EDU") => kerb
+                                              | Some (kerb, "LL.MIT.EDU") => String.mp Char.toLower kerb ^ "@LL.MIT.EDU"
                                               | _ => email
 
                              (* Smart name concatenation, skipping blank parts *)
