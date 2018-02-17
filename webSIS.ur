@@ -144,7 +144,12 @@ functor Make(M: sig
 
                              val email = field "Student Email"
                              val kerb = case String.split email #"@" of
-                                                Some (kerb, "MIT.EDU") => kerb
+                                                Some (kerb, "MIT.EDU") =>
+                                                (* Admittedly hacky special case, to detect usernames in the separate namespace for Lincoln Lab *)
+                                                if String.length kerb >= 5 && String.all Char.isDigit (String.substring kerb {Start = String.length kerb - 5, Len = 5}) then
+                                                    kerb ^ "@LL.MIT.EDU"
+                                                else
+                                                    kerb
                                               | Some (kerb, "LL.MIT.EDU") => String.mp Char.toLower kerb ^ "@LL.MIT.EDU"
                                               | _ => email
 
