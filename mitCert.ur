@@ -1,6 +1,6 @@
 (* Authentication using MIT client certificates *)
 
-open Bootstrap3
+open Bootstrap4
 
 functor Make(M : sig
                  con kerberos :: Name
@@ -79,9 +79,9 @@ functor Make(M : sig
           <dyn signal={st <- signal a.Status;
                        return (case st of
                                    None => <xml></xml>
-                                 | Some None => <xml><div class="bs3-alert alert-danger"><strong>Error:</strong> wrong username or password</div></xml>
+                                 | Some None => <xml><div class="bs-alert alert-danger"><strong>Error:</strong> wrong username or password</div></xml>
                                  | Some (Some name) => <xml>
-                                   <div class="bs3-alert alert-success">Logged in as <em>{[name]}</em></div>
+                                   <div class="bs-alert alert-success">Logged in as <em>{[name]}</em></div>
                                    <button class="btn btn-primary"
                                            value="Log out"
                                            onclick={fn _ =>

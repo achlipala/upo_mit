@@ -1,6 +1,6 @@
 (* Assignment of final grades, with export in MIT Online Grades format *)
 
-open Bootstrap3
+open Bootstrap4
 
 functor Make(M : sig
                  con groups :: {Unit}
