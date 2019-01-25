@@ -18,7 +18,7 @@ functor Make(M : sig
                  table users : ([kerberos = string, commonName = string, Password = option string] ++ mapU bool groups ++ others)
 
                  val defaults : option $(mapU bool groups ++ others)
-                 val allowMasquerade : option (variant (mapU unit groups))
+                 val allowMasquerade : option (list (variant (mapU unit groups)))
                  val requireSsl : bool
 
                  val flg : folder groups
