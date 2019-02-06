@@ -164,7 +164,8 @@ functor Make(M : sig
                        val fls = _
                        val injs = _
                        val eqs = _
+
+                       val accessDeniedErrorMessage = <xml>Access denied.  Are you sure you have an <a href="https://ist.mit.edu/certificates">MIT client certificate</a> set up in your browser?</xml>
                    end)
 
 end
-

@@ -1,5 +1,6 @@
 library $/upo
 allow url http://websis.mit.edu/
+allow url https://ist.mit.edu/certificates
 allow mime text/csv
 
 mitCert
