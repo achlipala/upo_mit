@@ -12,7 +12,7 @@ signature OUTPUT = sig
     val regDay : time
     val classesDone : time
 
-    con private
+    con private :: (Type * Type * Type)
     val cal : Calendar.t [Notable = string] [Notable = private]
 end
 
