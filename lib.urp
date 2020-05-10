@@ -5,5 +5,7 @@ allow mime text/csv
 
 mitCert
 webSIS
+mitGradesGeneric
 mitGrades
+mitAlternateGrades
 semester
