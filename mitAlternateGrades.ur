@@ -7,5 +7,6 @@ open MitGradesGeneric.Make(struct
                                val grades : $(mapU string grades) =
                                    {PE = "PE",
                                     NE = "NE",
-                                    IE = "IE"}
+                                    IE = "IE",
+                                    O = "O"}
                            end)
