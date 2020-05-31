@@ -26,7 +26,7 @@ functor Make(M: sig
              end) = struct
 
     open M
-         
+
     fun trimField s =
         let
             val s = String.trim s
@@ -228,7 +228,10 @@ functor Make(M: sig
         <ctextarea class="form-control" source={data} rows={20}/>
     </xml>
 
+    fun notification _ _ = <xml></xml>
+
     val ui = {Create = create,
               Onload = onload,
-              Render = render}
+              Render = render,
+              Notification = notification}
 end

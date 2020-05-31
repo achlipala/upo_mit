@@ -5,7 +5,7 @@ open Bootstrap4
 functor Make(M : sig
                  con kerberos :: Name
                  con commonName :: Name
-                     
+
                  con groups :: {Unit}
 
                  con others :: {Type}
@@ -107,11 +107,14 @@ functor Make(M : sig
                               set a.Status (Some res)}/>
         </xml>
 
+        fun notification _ _ = <xml></xml>
+
         val ui = {Create = create,
                   Onload = onload,
-                  Render = render}
+                  Render = render,
+                  Notification = notification}
     end
-            
+
     open Auth.Make(struct
                        open M
 
