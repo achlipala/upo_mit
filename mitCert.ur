@@ -144,16 +144,7 @@ functor Make(M : sig
                                         if dom <> "MIT.EDU" then
                                             error <xml>Certificate is not for an MIT e-mail address.</xml>
                                         else
-                                            let
-                                                val uname =
-                                                    (* Admittedly hacky special case, to detect usernames in the separate namespace for Lincoln Lab *)
-                                                    if String.length uname >= 5 && String.all Char.isDigit (String.substring uname {Start = String.length uname - 5, Len = 5}) then
-                                                        uname ^ "@LL.MIT.EDU"
-                                                    else
-                                                        uname
-                                            in
-                                                return (Some {kerberos = uname, commonName = user.CommonName})
-                                            end)
+                                            return (Some {kerberos = uname, commonName = user.CommonName}))
                              | Some r =>
                                name <- oneOrNoRowsE1 (SELECT (users.{commonName})
                                                       FROM users
