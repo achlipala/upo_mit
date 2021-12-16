@@ -1,6 +1,6 @@
 (* Authentication using MIT client certificates *)
 
-open Bootstrap4
+open Bootstrap
 
 functor Make(M : sig
                  con kerberos :: Name
