@@ -38,3 +38,29 @@ functor Make(M : sig
 
     structure Login : Ui.S0
 end
+
+(* If you'd like to reuse the associated mechanism for logging in by username
+ * and password, here it is. *)
+type password_cookie = { Username : string, Password : string }
+functor AlternativeLogin(M : sig
+                             con kerberos :: Name
+                             con commonName :: Name
+
+                             con groups :: {Unit}
+
+                             con others' :: {Type}
+
+                             constraint [kerberos] ~ [commonName]
+                             constraint [Password] ~ [kerberos, commonName]
+                             constraint [kerberos, commonName, Password] ~ groups
+                             constraint ([kerberos, commonName, Password] ++ groups) ~ others'
+
+                             table users : ([kerberos = string, commonName = string, Password = option string] ++ mapU bool groups ++ others')
+
+                             val requireSsl : bool
+                             val byPassword : http_cookie password_cookie
+                         end) : sig
+    include Ui.S0
+
+    val whoami : transaction (option {M.kerberos : string, M.commonName : string})
+end
